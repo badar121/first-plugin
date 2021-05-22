@@ -1,0 +1,20 @@
+{
+    "name": "badar/first-plugin",
+    "description": "My first wordpress plugin",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Badar Shahbaz",
+            "email": "badarbutt121@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./inc",
+            "Templates\\": "./templates"
+        }
+    }
+}
