@@ -4,9 +4,10 @@
  */
 namespace Inc\Pages;
 
-use \Inc\Base\BaseController;
-use \Inc\Api\SettingsApi;
+use Inc\Api\SettingsApi;
+use Inc\Base\BaseController;
 use Inc\Api\Callbacks\AdminCallbacks;
+use Inc\Api\Callbacks\ManagerCallbacks;
 
 /**
 * 
@@ -16,6 +17,7 @@ class Admin extends BaseController
 	public $settings;
 
 	public $callbacks;
+	public $callbacks_mngr;
 
 	public $pages = array();
 
@@ -26,16 +28,26 @@ class Admin extends BaseController
 		$this->settings = new SettingsApi();
 
 		$this->callbacks = new AdminCallbacks();
+		$this->callbacks_mngr = new ManagerCallbacks();
 
 		$this->setPages();
 
 		$this->setSubpages();
 
+		// Pass Arguments to the function in SettingsApi page. Then those arguments are passed in the
+		// actual function to create fields.
+		$this->setSettings();
+		$this->setSections();
+		$this->setFields();
+
 		$this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
 	}
 
-	public function setPages() 
-	{
+	/* This functions Pass Arguments to the function in SettingsApi page. Then those arguments are passed in the
+		actual function to create Admin Page.
+		The function in the callback renders Admin Page Interface. */
+	public function setPages() {
+	
 		$this->pages = array(
 			array(
 				'page_title' => 'Alecaddd Plugin', 
@@ -49,6 +61,9 @@ class Admin extends BaseController
 		);
 	}
 
+	/* This functions Pass Arguments to the function in SettingsApi page. Then those arguments are passed in the
+	actual function to create Sub pages of the Admin Page.
+	The function in the callback renders Sub Page Interface Interface. */
 	public function setSubpages()
 	{
 		$this->subpages = array(
@@ -77,5 +92,58 @@ class Admin extends BaseController
 				'callback' => array( $this->callbacks, 'adminWidget' )
 			)
 		);
+	}
+
+
+	/* These 3 functions Pass Arguments to the function in SettingsApi page. Then those arguments are passed in the
+	   actual function to create fields. */
+	public function setSettings()
+	{
+		$args = array();
+
+		foreach ( $this->managers as $key => $value ) {
+			$args[] = array(
+				'option_group' => 'alecaddd_plugin_settings',
+				'option_name' => $key,
+				'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
+			);
+		}
+
+		$this->settings->setSettings( $args );
+	}
+
+	public function setSections()
+	{
+		$args = array(
+			array(
+				'id' => 'alecaddd_admin_index',
+				'title' => 'Settings Manager',
+				'callback' => array( $this->callbacks_mngr, 'adminSectionManager' ),
+				'page' => 'alecaddd_plugin'
+			)
+		);
+
+		$this->settings->setSections( $args );
+	}
+
+	public function setFields()
+	{
+		$args = array();
+
+		foreach ( $this->managers as $key => $value ) {
+			$args[] = array(
+				'id' => $key,
+				'title' => $value,
+				'callback' => array( $this->callbacks_mngr, 'checkboxField' ),
+				'page' => 'alecaddd_plugin',
+				'section' => 'alecaddd_admin_index',
+				'args' => array(
+					'label_for' => $key,
+					'class' => 'ui-toggle'
+				)
+			);
+		}
+
+		$this->settings->setFields( $args );
 	}
 }

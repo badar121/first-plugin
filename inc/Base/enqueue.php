@@ -1,11 +1,14 @@
 <?php 
 /**
- * @package  first-plugin
+ * @package  AlecadddPlugin
  */
 namespace Inc\Base;
-use \Inc\Base\BaseController;
 
+use Inc\Base\BaseController;
 
+/**
+* 
+*/
 class Enqueue extends BaseController
 {
 	public function register() {
@@ -14,7 +17,7 @@ class Enqueue extends BaseController
 	
 	function enqueue() {
 		// enqueue all our scripts
-		wp_enqueue_style( 'style', $this->plugin_url . 'assets/style.css' );
-		wp_enqueue_script( 'cript', $this->plugin_url . 'assets/script.js' );
+		wp_enqueue_style( 'mypluginstyle', $this->plugin_url . 'assets/mystyle.css' );
+		wp_enqueue_script( 'mypluginscript', $this->plugin_url . 'assets/myscript.js' );
 	}
 }

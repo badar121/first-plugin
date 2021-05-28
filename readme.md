@@ -1,13 +1,14 @@
-# First plugin
+# Plugin 101 Series
 
-This is my first WordPress plugin and I'll extend it as I'll learn new things. So, basically this plugin will consist of many features.
+Full list of sections and features we will build during the series of Tutorials
 
-* Modular Admin Area
-* Custom Post Type Manager
-* Custom Taxanoy Manager
+* Modular Administration Area
+* CPT Manager
+* Custom Taxonomy Manager
+* Widget to Upload and Display media in sidebars
 * Post and Pages Gallery integration
 * Testimonial section: Comment in the front-end, Admins can approve comments, select which comments to display
-* Custom template sections
+* Custom template section
 * Ajax based Login/Register system
 * Membership protected area
 * Chat system

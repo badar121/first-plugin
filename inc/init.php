@@ -1,25 +1,25 @@
 <?php
 /**
- * @package first-plugin
+ * @package  AlecadddPlugin
  */
+namespace Inc;
 
- namespace Inc;
-
- final class Init {
-    /**
-	* Store all the classes inside an array
-	* @return array Full list of classes
-	*/
-
-    public static function get_services() {
-        return [
+final class Init
+{
+	/**
+	 * Store all the classes inside an array
+	 * @return array Full list of classes
+	 */
+	public static function get_services() 
+	{
+		return [
 			Pages\Admin::class,
 			Base\Enqueue::class,
-			Base\SettingsLink::class
+			Base\SettingsLinks::class
 		];
-    }
+	}
 
-    /**
+	/**
 	 * Loop through the classes, initialize them, 
 	 * and call the register() method if it exists
 	 * @return
@@ -46,5 +46,3 @@
 		return $service;
 	}
 }
-
- 

@@ -1,12 +1,12 @@
-<?php 
+<?php
 /**
- * @package first-plugin
+ * @package  AlecadddPlugin
  */
-
 namespace Inc\Base;
 
- class Activate {
-    public static function activate() {
-        flush_rewrite_rules();
-    }
- }
+class Activate
+{
+	public static function activate() {
+		flush_rewrite_rules();
+	}
+}
