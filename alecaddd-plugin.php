@@ -59,5 +59,5 @@ register_deactivation_hook( __FILE__, 'deactivate_alecaddd_plugin' );
  * Initialize all the core classes of the plugin
  */
 if ( class_exists( 'Inc\\Init' ) ) {
-	Inc\Init::register_services();
+	Inc\Init::registerServices();
 }

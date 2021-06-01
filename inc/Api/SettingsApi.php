@@ -18,7 +18,7 @@ class SettingsApi
 
 	public function register()
 	{
-		if ( ! empty($this->admin_pages) ) {
+		if ( ! empty($this->admin_pages) || ! empty($this->admin_subpages) ) {
 			add_action( 'admin_menu', array( $this, 'addAdminMenu' ) );
 		}
 
@@ -99,17 +99,17 @@ class SettingsApi
 
 	public function registerCustomFields()
 	{
-		// Register setting
+		// register setting
 		foreach ( $this->settings as $setting ) {
 			register_setting( $setting["option_group"], $setting["option_name"], ( isset( $setting["callback"] ) ? $setting["callback"] : '' ) );
 		}
 
-		// Add settings section
+		// add settings section
 		foreach ( $this->sections as $section ) {
 			add_settings_section( $section["id"], $section["title"], ( isset( $section["callback"] ) ? $section["callback"] : '' ), $section["page"] );
 		}
 
-		// Add settings field
+		// add settings field
 		foreach ( $this->fields as $field ) {
 			add_settings_field( $field["id"], $field["title"], ( isset( $field["callback"] ) ? $field["callback"] : '' ), $field["page"], $field["section"], ( isset( $field["args"] ) ? $field["args"] : '' ) );
 		}

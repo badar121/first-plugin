@@ -30,16 +30,16 @@ var reload       = browserSync.reload;
 // Project related variables
 var projectURL   = 'https://test.dev';
 
-var styleSRC     = './src/scss/mystyle.scss';
+var styleSRC     = 'src/scss/mystyle.scss';
 var styleURL     = './assets/';
 var mapURL       = './';
 
-var jsSRC        = './src/js/myscript.js';
+var jsSRC        = 'src/js/myscript.js';
 var jsURL        = './assets/';
 
-var styleWatch   = './src/scss/**/*.scss';
-var jsWatch      = './src/js/**/*.js';
-var phpWatch     = './**/*.php';
+var styleWatch   = 'src/scss/**/*.scss';
+var jsWatch      = 'src/js/**/*.js';
+var phpWatch     = '**/*.php';
 
 // Tasks
 gulp.task( 'browser-sync', function() {
